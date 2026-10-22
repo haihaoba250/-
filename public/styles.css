@@ -750,12 +750,14 @@ video {
   height: 36px;
   flex: none;
   place-items: center;
+  padding: 0;
   border-radius: 11px;
   background: var(--yellow);
   color: #161613;
 }
 
 .secondary-action-icon svg {
+  display: block;
   width: 18px;
   height: 18px;
 }
@@ -1289,9 +1291,10 @@ video {
     min-height: 72px;
   }
 
+  .media-only-button,
   .copy-button {
     min-height: 72px;
-    padding: 0 10px;
+    padding: 0 16px;
     font-size: 11px;
   }
 
