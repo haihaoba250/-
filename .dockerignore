@@ -1,0 +1,6 @@
+.git
+.reference
+node_modules
+*.log
+start-app.ps1
+*.cmd
