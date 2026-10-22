@@ -724,11 +724,11 @@ video {
 .copy-button,
 .media-only-button {
   display: inline-flex;
-  gap: 6px;
+  gap: 12px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 76px;
-  padding: 0 19px;
+  padding: 0 16px;
   border: 1px solid var(--line);
   border-radius: 17px;
   background: rgba(255, 255, 255, 0.72);
@@ -743,38 +743,43 @@ video {
   background: #fff;
 }
 
-.copy-button svg,
-.media-only-button svg {
-  width: 17px;
-  height: 17px;
+.secondary-action-icon {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--yellow);
+  color: #161613;
 }
 
-.media-only-copy {
+.secondary-action-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.secondary-action-copy {
   min-width: 0;
   text-align: left;
 }
 
-.media-only-copy strong,
-.media-only-copy small {
+.secondary-action-copy strong,
+.secondary-action-copy small {
   display: block;
 }
 
-.media-only-copy strong {
+.secondary-action-copy strong {
   overflow: hidden;
   font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.media-only-copy small {
+.secondary-action-copy small {
   margin-top: 3px;
   color: #827e74;
   font-size: 9px;
-}
-
-.media-only-button svg {
-  margin-left: auto;
-  flex: none;
 }
 
 .copy-button:disabled,
@@ -1502,7 +1507,7 @@ html[data-theme="dark"] .media-only-button {
   color: #fff;
 }
 
-html[data-theme="dark"] .media-only-copy small {
+html[data-theme="dark"] .secondary-action-copy small {
   color: #aaa79e;
 }
 
