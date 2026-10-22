@@ -32,7 +32,7 @@
         systemTheme.addEventListener("change", window.applyAdaptiveTheme);
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=9">
+    <link rel="stylesheet" href="/styles.css?v=10">
     <title>闲鱼无水印下载</title>
   </head>
   <body>
@@ -130,8 +130,8 @@
         <article class="save-panel">
           <div class="save-copy">
             <span class="step-label light">03 / 保存内容</span>
-            <h2>逐个保存全部</h2>
-            <p>每张原图和视频会作为独立文件保存，同时把商品描述复制到剪贴板。</p>
+            <h2>一键保存全部</h2>
+            <p>图片和视频会作为独立文件保存；商品描述可以单独复制。</p>
           </div>
           <div class="save-actions">
             <button class="save-button" id="saveAllButton" type="button">
@@ -139,8 +139,8 @@
                 <svg viewBox="0 0 24 24"><path d="M12 4v11m0 0 4-4m-4 4-4-4M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span class="save-button-copy">
-                <strong>保存全部并复制描述</strong>
-                <small id="saveMediaLabel">图片 + 视频，不打包</small>
+                <strong>一键保存图片和视频</strong>
+                <small id="saveMediaLabel">图片 + 视频，不单独打包</small>
               </span>
               <svg class="save-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12m-4.5-4.5L18 12l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -150,7 +150,7 @@
             </button>
           </div>
           <p class="platform-tip">
-            <span>提示</span> 浏览器会逐个下载文件；若 iOS 或浏览器限制连续下载，可点击下方单项保存按钮。
+            <span>提示</span> 一键保存会依次下载所有文件；若 iOS 或浏览器限制连续下载，可使用下方单项保存按钮。
           </p>
         </article>
 
@@ -203,6 +203,6 @@
     </main>
 
     <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
-    <script src="/app.js?v=9" defer></script>
+    <script src="/app.js?v=10" defer></script>
   </body>
 </html>

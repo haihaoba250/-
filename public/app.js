@@ -156,7 +156,7 @@ function renderItem(item) {
   elements.saveMediaLabel.textContent = [
     item.images.length ? `${item.images.length} 张原图` : "",
     item.video ? "1 个原视频" : "",
-    "逐个保存"
+    "一键保存"
   ].filter(Boolean).join(" · ");
 
   renderImages(item);
@@ -318,9 +318,6 @@ async function saveAll() {
 
   elements.saveAllButton.disabled = true;
   const originalLabel = elements.saveMediaLabel.textContent;
-  const copyPromise = state.item.description
-    ? copyDescription(false)
-    : Promise.resolve(false);
 
   for (let index = 0; index < downloads.length; index += 1) {
     elements.saveMediaLabel.textContent =
@@ -331,13 +328,7 @@ async function saveAll() {
     }
   }
 
-  const copied = await copyPromise;
-
-  showToast(
-    copied
-      ? `已逐个保存 ${downloads.length} 个文件，商品描述已复制`
-      : `已逐个保存 ${downloads.length} 个文件；描述未复制，可点击“只复制描述”`
-  );
+  showToast(`已一键发起 ${downloads.length} 个文件下载`);
 
   window.setTimeout(() => {
     elements.saveAllButton.disabled = false;

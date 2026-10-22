@@ -1,11 +1,11 @@
 "use strict";
 
-const CACHE_NAME = "xianyu-asset-saver-v9";
+const CACHE_NAME = "xianyu-asset-saver-v10";
 const SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=9",
-  "/app.js?v=9",
+  "/styles.css?v=10",
+  "/app.js?v=10",
   "/manifest.webmanifest",
   "/icon.svg",
   "/icon-192.png",
