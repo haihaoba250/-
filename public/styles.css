@@ -1274,3 +1274,156 @@ video {
     transition-duration: 0.01ms !important;
   }
 }
+
+html[data-theme="dark"] {
+  --ink: #f2f0e8;
+  --ink-soft: #aaa79e;
+  --paper: #141411;
+  --paper-deep: #292821;
+  --card: rgba(29, 29, 25, 0.9);
+  --line: rgba(255, 255, 255, 0.13);
+  --red: #ff8d80;
+  --green: #65c999;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+  background: var(--paper);
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 8% 6%, rgba(255, 218, 53, 0.06), transparent 24rem),
+    radial-gradient(circle at 92% 38%, rgba(255, 218, 53, 0.04), transparent 26rem),
+    linear-gradient(180deg, #191915 0%, var(--paper) 48%, #0f0f0d 100%);
+}
+
+html[data-theme="dark"] .brand-mark {
+  border-color: #11110e;
+  box-shadow: 4px 4px 0 #080806;
+  color: #161613;
+}
+
+html[data-theme="dark"] .brand small,
+html[data-theme="dark"] .step-label {
+  color: #aaa79e;
+}
+
+html[data-theme="dark"] .public-badge {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="dark"] .install-button {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+html[data-theme="dark"] .parser-card,
+html[data-theme="dark"] .loading-card,
+html[data-theme="dark"] .product-card,
+html[data-theme="dark"] .gallery-section,
+html[data-theme="dark"] .video-section,
+html[data-theme="dark"] .description-section {
+  border-color: var(--line);
+  background: var(--card);
+}
+
+html[data-theme="dark"] .input-wrap textarea {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #1d1d18;
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .input-wrap textarea::placeholder {
+  color: #858278;
+}
+
+html[data-theme="dark"] .input-wrap textarea:focus {
+  border-color: rgba(255, 218, 53, 0.55);
+  background: #23231d;
+}
+
+html[data-theme="dark"] .paste-button {
+  background: #303028;
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .parse-button {
+  border-color: #f2f0e8;
+  background: #f2f0e8;
+  color: #161613;
+}
+
+html[data-theme="dark"] .parse-button:hover {
+  background: #ffffff;
+}
+
+html[data-theme="dark"] .privacy-note,
+html[data-theme="dark"] .legal-note {
+  color: #98958b;
+}
+
+html[data-theme="dark"] .error-card {
+  border-color: rgba(255, 141, 128, 0.25);
+  background: rgba(67, 35, 32, 0.72);
+}
+
+html[data-theme="dark"] .error-card p {
+  color: #e2b2aa;
+}
+
+html[data-theme="dark"] .error-icon {
+  background: rgba(255, 141, 128, 0.16);
+}
+
+html[data-theme="dark"] .product-cover-wrap,
+html[data-theme="dark"] .media-card {
+  background: #292821;
+}
+
+html[data-theme="dark"] .item-number {
+  background: #292821;
+  color: #bbb7ab;
+}
+
+html[data-theme="dark"] .asset-counts {
+  color: #aaa79e;
+}
+
+html[data-theme="dark"] .save-panel {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.055), transparent 22rem),
+    #090908;
+}
+
+html[data-theme="dark"] .save-button {
+  color: #161613;
+}
+
+html[data-theme="dark"] .save-button-icon,
+html[data-theme="dark"] .media-index {
+  background: #161613;
+  color: var(--yellow);
+}
+
+html[data-theme="dark"] .media-save {
+  border-color: rgba(255, 255, 255, 0.13);
+  background: rgba(24, 24, 20, 0.92);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .media-save:hover,
+html[data-theme="dark"] .tiny-copy:hover {
+  background: var(--yellow);
+  color: #161613;
+}
+
+html[data-theme="dark"] .video-download {
+  background: rgba(255, 218, 53, 0.94);
+  color: #161613;
+}
+
+html[data-theme="dark"] .description-text {
+  color: #d3d0c6;
+}
+
+html[data-theme="dark"] .description-text:empty::before {
+  color: #89867d;
+}

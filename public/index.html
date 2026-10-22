@@ -3,15 +3,50 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#f5f2eb">
+    <meta name="color-scheme" content="light dark">
+    <meta id="themeColor" name="theme-color" content="#f5f2eb">
     <meta name="description" content="粘贴闲鱼商品链接，直接保存商品图片、视频并复制描述。">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta id="statusBarStyle" name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="闲鱼无水印下载">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="/styles.css?v=5">
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const themeColor = document.querySelector("#themeColor");
+        const statusBarStyle = document.querySelector("#statusBarStyle");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        window.applyAdaptiveTheme = () => {
+          const requestedTheme = new URLSearchParams(window.location.search).get("theme");
+          const hour = new Date().getHours();
+          const isNight = hour >= 19 || hour < 7;
+          const theme =
+            requestedTheme === "dark" || requestedTheme === "light"
+              ? requestedTheme
+              : systemTheme.matches || isNight
+                ? "dark"
+                : "light";
+
+          root.dataset.theme = theme;
+          root.style.colorScheme = theme;
+          themeColor.content = theme === "dark" ? "#151512" : "#f5f2eb";
+          statusBarStyle.content = theme === "dark" ? "black-translucent" : "default";
+        };
+
+        window.applyAdaptiveTheme();
+        systemTheme.addEventListener("change", window.applyAdaptiveTheme);
+        window.setInterval(window.applyAdaptiveTheme, 60 * 1000);
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) {
+            window.applyAdaptiveTheme();
+          }
+        });
+      })();
+    </script>
+    <link rel="stylesheet" href="/styles.css?v=8">
     <title>闲鱼无水印下载</title>
   </head>
   <body>
@@ -43,7 +78,7 @@
         <div class="parser-card">
           <div class="parser-head">
             <div>
-              <span class="step-label">粘贴链接</span>
+              <span class="step-label">01 / 粘贴链接</span>
               <h2>解析商品</h2>
             </div>
           </div>
@@ -108,7 +143,7 @@
 
         <article class="save-panel">
           <div class="save-copy">
-            <span class="step-label light">03 / 收好素材</span>
+            <span class="step-label light">03 / 保存内容</span>
             <h2>逐个保存全部</h2>
             <p>每张原图和视频会作为独立文件保存，同时把商品描述复制到剪贴板。</p>
           </div>
@@ -182,6 +217,6 @@
     </main>
 
     <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
-    <script src="/app.js?v=5" defer></script>
+    <script src="/app.js?v=8" defer></script>
   </body>
 </html>
