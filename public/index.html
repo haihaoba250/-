@@ -20,15 +20,7 @@
         const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
         window.applyAdaptiveTheme = () => {
-          const requestedTheme = new URLSearchParams(window.location.search).get("theme");
-          const hour = new Date().getHours();
-          const isNight = hour >= 19 || hour < 7;
-          const theme =
-            requestedTheme === "dark" || requestedTheme === "light"
-              ? requestedTheme
-              : systemTheme.matches || isNight
-                ? "dark"
-                : "light";
+          const theme = systemTheme.matches ? "dark" : "light";
 
           root.dataset.theme = theme;
           root.style.colorScheme = theme;
@@ -38,15 +30,9 @@
 
         window.applyAdaptiveTheme();
         systemTheme.addEventListener("change", window.applyAdaptiveTheme);
-        window.setInterval(window.applyAdaptiveTheme, 60 * 1000);
-        document.addEventListener("visibilitychange", () => {
-          if (!document.hidden) {
-            window.applyAdaptiveTheme();
-          }
-        });
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=8">
+    <link rel="stylesheet" href="/styles.css?v=9">
     <title>闲鱼无水印下载</title>
   </head>
   <body>
@@ -217,6 +203,6 @@
     </main>
 
     <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
-    <script src="/app.js?v=8" defer></script>
+    <script src="/app.js?v=9" defer></script>
   </body>
 </html>
