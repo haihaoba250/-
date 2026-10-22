@@ -19,6 +19,8 @@ const elements = {
   newLinkButton: document.querySelector("#newLinkButton"),
   saveAllButton: document.querySelector("#saveAllButton"),
   saveMediaLabel: document.querySelector("#saveMediaLabel, #bundleSizeLabel"),
+  saveMediaOnlyButton: document.querySelector("#saveMediaOnlyButton"),
+  saveOnlyMediaLabel: document.querySelector("#saveOnlyMediaLabel"),
   copyDescriptionButton: document.querySelector("#copyDescriptionButton"),
   descriptionCopySmall: document.querySelector("#descriptionCopySmall"),
   imageGallery: document.querySelector("#imageGallery"),
@@ -153,11 +155,17 @@ function renderItem(item) {
   elements.assetCounts.append(createCount("张图片", item.images.length));
   elements.assetCounts.append(createCount("个视频", item.video ? 1 : 0));
   elements.assetCounts.append(createCount("段描述", item.description ? 1 : 0));
-  elements.saveMediaLabel.textContent = [
+  const mediaSummary = [
     item.images.length ? `${item.images.length} 张原图` : "",
-    item.video ? "1 个原视频" : "",
-    "一键保存"
+    item.video ? "1 个原视频" : ""
   ].filter(Boolean).join(" · ");
+  elements.saveMediaLabel.textContent = [
+    mediaSummary,
+    item.description ? "完整描述" : ""
+  ].filter(Boolean).join(" · ");
+  elements.saveOnlyMediaLabel.textContent = mediaSummary || "没有可保存的媒体";
+  elements.saveAllButton.disabled = item.mediaCount === 0;
+  elements.saveMediaOnlyButton.disabled = item.mediaCount === 0;
 
   renderImages(item);
   renderVideo(item);
@@ -285,9 +293,9 @@ function triggerMediaDownload(downloadUrl) {
   anchor.remove();
 }
 
-async function saveAll() {
+function getMediaDownloads() {
   if (!state.item) {
-    return;
+    return [];
   }
 
   const title = baseFilename(state.item.title);
@@ -311,16 +319,21 @@ async function saveAll() {
       label: "视频"
     });
   }
+  return downloads;
+}
+
+async function downloadAllMedia(labelElement, button) {
+  const downloads = getMediaDownloads();
   if (!downloads.length) {
     showToast("这件商品没有可下载的图片或视频。", "error");
-    return;
+    return 0;
   }
 
-  elements.saveAllButton.disabled = true;
-  const originalLabel = elements.saveMediaLabel.textContent;
+  button.disabled = true;
+  const originalLabel = labelElement.textContent;
 
   for (let index = 0; index < downloads.length; index += 1) {
-    elements.saveMediaLabel.textContent =
+    labelElement.textContent =
       `正在保存 ${index + 1}/${downloads.length} · ${downloads[index].label}`;
     triggerMediaDownload(downloads[index].url);
     if (index < downloads.length - 1) {
@@ -328,12 +341,38 @@ async function saveAll() {
     }
   }
 
-  showToast(`已一键发起 ${downloads.length} 个文件下载`);
-
   window.setTimeout(() => {
-    elements.saveAllButton.disabled = false;
-    elements.saveMediaLabel.textContent = originalLabel;
+    button.disabled = false;
+    labelElement.textContent = originalLabel;
   }, 1500);
+  return downloads.length;
+}
+
+async function saveAllAndCopy() {
+  const copyPromise = state.item?.description
+    ? copyDescription(false)
+    : Promise.resolve(false);
+  const count = await downloadAllMedia(elements.saveMediaLabel, elements.saveAllButton);
+  if (!count) {
+    return;
+  }
+
+  const copied = await copyPromise;
+  showToast(
+    copied
+      ? `已一键保存全部 ${count} 个文件，商品描述已复制`
+      : `已一键保存全部 ${count} 个文件；描述未复制，可点击“只复制描述”`
+  );
+}
+
+async function saveMediaOnly() {
+  const count = await downloadAllMedia(
+    elements.saveOnlyMediaLabel,
+    elements.saveMediaOnlyButton
+  );
+  if (count) {
+    showToast(`已一键发起 ${count} 个文件下载`);
+  }
 }
 
 function resetView() {
@@ -406,7 +445,8 @@ elements.retryButton.addEventListener("click", () => parseListing(state.lastInpu
 elements.newLinkButton.addEventListener("click", resetView);
 elements.copyDescriptionButton.addEventListener("click", () => copyDescription());
 elements.descriptionCopySmall.addEventListener("click", () => copyDescription());
-elements.saveAllButton.addEventListener("click", saveAll);
+elements.saveAllButton.addEventListener("click", saveAllAndCopy);
+elements.saveMediaOnlyButton.addEventListener("click", saveMediaOnly);
 elements.installButton.addEventListener("click", handleInstall);
 
 elements.input.addEventListener("keydown", (event) => {
