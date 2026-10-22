@@ -1,0 +1,13 @@
+{
+  "name": "xianyu-asset-saver",
+  "version": "1.0.0",
+  "private": true,
+  "description": "闲鱼无水印下载：保存公开商品图片、视频并复制商品描述。",
+  "scripts": {
+    "start": "node server.js",
+    "icons": "node scripts/generate-icons.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

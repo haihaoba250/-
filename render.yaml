@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: xianyu-watermark-free-downloader
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
