@@ -647,6 +647,7 @@ video {
 .save-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
   gap: 10px;
 }
 
@@ -1323,8 +1324,9 @@ video {
     grid-template-columns: 1fr;
   }
 
+  .media-only-button,
   .copy-button {
-    min-height: 44px;
+    min-height: 72px;
   }
 }
 
